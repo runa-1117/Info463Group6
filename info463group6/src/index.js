@@ -1,17 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Keyboard from "simple-keyboard";
+import swipe from "swipe-keyboard";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// CSS
+import "simple-keyboard/build/css/index.css";
+import "./styles/index.css";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+let keyboard = new Keyboard({
+  onChange: input => onChange(input),
+  onKeyPress: button => onKeyPress(button),
+  useMouseEvents: true,
+  modules: [swipe]
+});
+
+/**
+ * Update simple-keyboard when input is changed directly
+ */
+document.querySelector(".input").addEventListener("input", event => {
+  keyboard.setInput(event.target.value);
+});
+
+function onChange(input) {
+  document.querySelector(".input").value = input;
+  console.log("Input changed", input);
+}
+
+function onKeyPress(button) {
+  console.log("Button pressed", button);
+
+  /**
+   * If you want to handle the shift and caps lock buttons
+   */
+  if (button === "{shift}" || button === "{lock}") handleShift();
+}
+
+function handleShift() {
+  let currentLayout = keyboard.options.layoutName;
+  let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+  keyboard.setOptions({
+    layoutName: shiftToggle
+  });
+}
