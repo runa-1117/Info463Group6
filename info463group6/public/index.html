@@ -1,16 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<link href="./src/index.css" ref="stylesheet" />
+  <meta charset="UTF-8" />
+  <title>Gesture Keyboard</title>
+  <!-- Use the built CSS, not src/index.css -->
+  <link href="%PUBLIC_URL%/favicon.ico" rel="icon" />
 </head>
 
 <body>
-	<input class="input" placeholder="Swipe over the virtual keyboard to start" />
-	<div class="keyboardContainer">
-		<div class="simple-keyboard"></div>
-	</div>
-
-	<script src="src/index.js"></script>
+  <canvas id="gestureCanvas" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+  <input class="input" placeholder="Swipe over the virtual keyboard to start" />
+  <div class="keyboardContainer">
+    <div class="simple-keyboard"></div>
+  </div>
+  <!-- React will inject the bundle here -->
+  <div id="root"></div>
 </body>
 
 </html>
